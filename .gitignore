@@ -1,0 +1,5 @@
+/.vs
+/Contracts/*
+/EF_Code_First/*
+/Entities/*
+/Repository/*
