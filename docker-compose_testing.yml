@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+   db:
+    image: 192.168.1.150:5000/mysql-server:testing
+    container_name: db_testing
+    build:
+        dockerfile: Db.Dockerfile
+        context: .
+    environment:
+        MYSQL_ROOT_PASSWORD: inno2018
+        MYSQL_DATABASE: innodb_testing
+        MYSQL_USER: anybim
+        MYSQL_PASSWORD: anybim2018
+        TZ: Asia/Ho_Chi_Minh
+    networks:
+        - inno_net
+    volumes:
+        - inno_vol_testing:/var/lib/mysql
+    restart: always
+    ports:
+        - "3306:3306"
+
+   redis:
+    image: redis:3.0
+    container_name: haproxy_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+   back-end:
+    image: 192.168.1.150:5000/license_mgmt_back:testing
+    container_name: lm_back_testing
+    build:
+        dockerfile: Backend.Dockerfile
+        context: .
+    environment:
+        ASPNETCORE_ENVIRONMENT: Testing
+        TZ: Asia/Ho_Chi_Minh
+    restart: unless-stopped
+    links:
+        - db
+    depends_on:
+        - db
+    ports:
+        - "8080:80"
+    networks:
+        - inno_net
+
+networks:
+    inno_net:
+        external: true
+
+volumes:
+    inno_vol_testing:
+        external: true

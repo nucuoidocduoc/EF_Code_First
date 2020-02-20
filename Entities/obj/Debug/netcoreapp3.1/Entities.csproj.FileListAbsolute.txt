@@ -1,0 +1,16 @@
+D:\DotNetCore\EF_Code_First\Entities\bin\Debug\netcoreapp3.1\Entities.deps.json
+D:\DotNetCore\EF_Code_First\Entities\bin\Debug\netcoreapp3.1\Entities.dll
+D:\DotNetCore\EF_Code_First\Entities\obj\Debug\netcoreapp3.1\Entities.csprojAssemblyReference.cache
+D:\DotNetCore\EF_Code_First\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfoInputs.cache
+D:\DotNetCore\EF_Code_First\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfo.cs
+D:\DotNetCore\EF_Code_First\Entities\bin\Debug\netcoreapp3.1\Entities.pdb
+D:\DotNetCore\EF_Code_First\Entities\obj\Debug\netcoreapp3.1\Entities.dll
+D:\DotNetCore\EF_Code_First\Entities\obj\Debug\netcoreapp3.1\Entities.pdb
+D:\GitHub\EF_Code_First\Entities\bin\Debug\netcoreapp3.1\Entities.deps.json
+D:\GitHub\EF_Code_First\Entities\bin\Debug\netcoreapp3.1\Entities.dll
+D:\GitHub\EF_Code_First\Entities\bin\Debug\netcoreapp3.1\Entities.pdb
+D:\GitHub\EF_Code_First\Entities\obj\Debug\netcoreapp3.1\Entities.csprojAssemblyReference.cache
+D:\GitHub\EF_Code_First\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfoInputs.cache
+D:\GitHub\EF_Code_First\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfo.cs
+D:\GitHub\EF_Code_First\Entities\obj\Debug\netcoreapp3.1\Entities.dll
+D:\GitHub\EF_Code_First\Entities\obj\Debug\netcoreapp3.1\Entities.pdb
