@@ -6,6 +6,7 @@ using Contracts;
 using Entities.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,14 @@ namespace EF_Code_First
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+            services.Configure<IISOptions>(options => {
+            });
             services.AddDbContext<ApplicationContext>(opts => opts.UseMySql(Configuration["mysql-database:connectionString"], build => build.MigrationsAssembly("EF_Code_First")));
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddControllers();
@@ -42,6 +51,13 @@ namespace EF_Code_First
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseCors("CorsPolicy");
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
 
             app.UseRouting();
 

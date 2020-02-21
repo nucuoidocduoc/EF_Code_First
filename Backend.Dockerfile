@@ -1,43 +1,31 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
-
-ARG BUILD_TIME
-ENV ASPNETCORE_ENVIRONMENT=$BUILD_TIME
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
-COPY LicenseManagerServer/LicenseManagerServer.csproj ./LicenseManager/
-RUN dotnet restore LicenseManager
+COPY ./EF_Code_First/EF_Code_First.csproj ./EF_Code_First/
+RUN dotnet restore EF_Code_First
 
 # copy Entities csproj and restore as distinct layers
-COPY Entities/Entities.csproj ./Entities/
+COPY ./Entities/Entities.csproj ./Entities/
 RUN dotnet restore Entities
 
-# copy LoggerService csproj and restore as distinct layers
-COPY LoggerService/LoggerService.csproj ./LoggerService/
-RUN dotnet restore LoggerService
-
 # copy Repository csproj and restore as distinct layers
-COPY Repository/Repository.csproj ./Repository/
+COPY ./Repository/Repository.csproj ./Repository/
 RUN dotnet restore Repository
 
 # copy Contracts csproj and restore as distinct layers
-COPY Contracts/Contracts.csproj ./Contracts/
+COPY ./Contracts/Contracts.csproj ./Contracts/
 RUN dotnet restore Contracts
 
 # copy everything else and build app
-COPY LicenseManagerServer/. ./LicenseManager/
-COPY Entities/. ./Entities/
-COPY LoggerService/. ./LoggerService/
-COPY Repository/. ./Repository/
-COPY Contracts/. ./Contracts/
+COPY ./EF_Code_First/. ./EF_Code_First/
+COPY ./Entities/. ./Entities/
+COPY ./Repository/. ./Repository/
+COPY ./Contracts/. ./Contracts/
 
-WORKDIR /app/LicenseManager
-RUN dotnet publish -c Release -o out
+RUN dotnet publish ./EF_Code_First/EF_Code_First.csproj -c Release -o /publish/
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
-WORKDIR /app
-COPY --from=build /app/LicenseManager/out ./
-ENTRYPOINT ["dotnet", "LicenseManagerServer.dll"]
+WORKDIR /publish
 
-RUN mkdir -p /app/Resources/Installer
+ENTRYPOINT ["dotnet", "EF_Code_First.dll"]

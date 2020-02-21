@@ -17,7 +17,7 @@ namespace Entities.Model
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(50, ErrorMessage = "LasrName of Student is so long")]
+        [MaxLength(255, ErrorMessage = "LasrName of Student is so long")]
         public string LastName { get; set; }
 
         public virtual IEnumerable<Subject> Subjects { get; set; }

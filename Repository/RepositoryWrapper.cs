@@ -25,7 +25,9 @@ namespace Repository
 
         public ISubjectRepository Subject => _subject ??= new SubjectRepository(_applicationContext);
 
-        public void SaveChange()
+        public ApplicationContext Context => _applicationContext;
+
+        public void SaveChanges()
         {
             _applicationContext.SaveChanges();
         }

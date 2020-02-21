@@ -1,4 +1,5 @@
-﻿using Entities.Model;
+﻿using Entities.Context;
+using Entities.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,8 @@ namespace Contracts
         ITeacherRepository Teacher { get; }
         ISubjectRepository Subject { get; }
 
-        void SaveChange();
+        ApplicationContext Context { get; }
+
+        void SaveChanges();
     }
 }
